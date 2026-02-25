@@ -355,7 +355,7 @@ I'm Stuck
 
 ---
 
-## EXAM TIME MANAGEMENT
+## OSCP TIME MANAGEMENT
 
 ```
 23h 45m Exam Timer

@@ -1,0 +1,360 @@
+/* ═══════════════════════════════════════════════════
+   OSCP Methodology — Custom mdBook Theme
+   Dark terminal aesthetic for offensive security
+   ═══════════════════════════════════════════════════ */
+
+/* ─── Navy theme overrides (default dark) ─── */
+.navy {
+    --bg: #0d1117;
+    --fg: #c9d1d9;
+    --sidebar-bg: #010409;
+    --sidebar-fg: #8b949e;
+    --sidebar-active: #58a6ff;
+    --links: #58a6ff;
+    --inline-code-color: #f0883e;
+    --theme-popup-bg: #161b22;
+    --theme-popup-border: #30363d;
+    --quote-bg: #161b22;
+    --quote-border: #f0883e;
+    --table-border-color: #21262d;
+    --table-header-bg: #161b22;
+    --table-alternate-bg: #0d1117;
+    --searchbar-border-color: #30363d;
+    --searchbar-bg: #0d1117;
+    --searchbar-fg: #c9d1d9;
+    --searchresults-header-fg: #58a6ff;
+    --searchresults-border-color: #30363d;
+    --icons: #8b949e;
+    --icons-hover: #c9d1d9;
+}
+
+/* ─── Global typography ─── */
+.navy .content main {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 900px;
+}
+
+/* ─── Headings ─── */
+.navy h1 {
+    color: #f0f6fc;
+    border-bottom: 2px solid #f0883e;
+    padding-bottom: 0.4em;
+    margin-top: 1.5em;
+    font-size: 2em;
+}
+
+.navy h2 {
+    color: #e6edf3;
+    border-bottom: 1px solid #21262d;
+    padding-bottom: 0.3em;
+    margin-top: 1.8em;
+    font-size: 1.5em;
+}
+
+.navy h3 {
+    color: #58a6ff;
+    margin-top: 1.6em;
+    font-size: 1.2em;
+}
+
+/* ─── Code blocks — terminal style ─── */
+.navy pre {
+    background: #010409 !important;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 1em 1.2em;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-x: auto;
+    position: relative;
+}
+
+.navy pre::before {
+    content: "$ ";
+    color: #3fb950;
+    font-weight: bold;
+    opacity: 0;
+}
+
+.navy code {
+    font-family: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 0.9em;
+}
+
+.navy :not(pre) > code {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+    color: #f0883e;
+    font-size: 0.85em;
+}
+
+/* ─── Blockquotes — notes/tips ─── */
+.navy blockquote {
+    background: #161b22;
+    border-left: 4px solid #f0883e;
+    border-radius: 0 6px 6px 0;
+    padding: 0.8em 1.2em;
+    margin: 1em 0;
+    color: #8b949e;
+    font-style: normal;
+}
+
+.navy blockquote p {
+    margin: 0;
+}
+
+/* ─── Bail signal / warning blockquotes ─── */
+.navy blockquote:has(> p:first-child > :first-child[alt*="⚠"]),
+.navy blockquote p:first-child:has(strong:first-child) {
+    border-left-color: #f85149;
+}
+
+/* ─── Details/summary — collapsible example output ─── */
+.navy details {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    margin: 0.8em 0 1.2em;
+    overflow: hidden;
+}
+
+.navy details summary {
+    background: #161b22;
+    padding: 0.6em 1em;
+    cursor: pointer;
+    color: #58a6ff;
+    font-weight: 600;
+    font-size: 0.9em;
+    user-select: none;
+    transition: background 0.15s;
+}
+
+.navy details summary:hover {
+    background: #1c2129;
+}
+
+.navy details[open] summary {
+    border-bottom: 1px solid #30363d;
+}
+
+.navy details > pre {
+    border: none;
+    margin: 0;
+    border-radius: 0;
+}
+
+/* ─── Tables ─── */
+.navy table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 0.95em;
+}
+
+.navy table th {
+    background: #161b22;
+    color: #f0f6fc;
+    font-weight: 600;
+    padding: 0.7em 1em;
+    border: 1px solid #21262d;
+    text-align: left;
+}
+
+.navy table td {
+    padding: 0.6em 1em;
+    border: 1px solid #21262d;
+}
+
+.navy table tr:nth-child(even) {
+    background: #0d1117;
+}
+
+.navy table tr:nth-child(odd) {
+    background: #010409;
+}
+
+.navy table tr:hover {
+    background: #161b22;
+}
+
+/* ─── Horizontal rules — section dividers ─── */
+.navy hr {
+    border: none;
+    border-top: 1px solid #21262d;
+    margin: 2em 0;
+}
+
+/* ─── Links ─── */
+.navy a {
+    color: #58a6ff;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color 0.15s;
+}
+
+.navy a:hover {
+    border-bottom-color: #58a6ff;
+}
+
+/* ─── Sidebar polish ─── */
+.navy .sidebar {
+    background: #010409;
+    scrollbar-width: thin;
+    scrollbar-color: #30363d #010409;
+}
+
+.navy .sidebar .sidebar-scrollbox {
+    padding: 1em 0;
+}
+
+.navy .sidebar ol.chapter li a {
+    color: #8b949e;
+    padding: 0.3em 1.2em;
+    display: block;
+    transition: color 0.15s, background 0.15s;
+}
+
+.navy .sidebar ol.chapter li a:hover {
+    color: #c9d1d9;
+    background: rgba(88, 166, 255, 0.08);
+}
+
+.navy .sidebar ol.chapter li.active > a {
+    color: #58a6ff;
+    background: rgba(88, 166, 255, 0.12);
+    font-weight: 600;
+}
+
+/* Section headers in sidebar */
+.navy .sidebar .chapter-item .section-header {
+    color: #f0f6fc;
+    font-weight: 700;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1em 1.2em 0.3em;
+}
+
+/* ─── Search ─── */
+.navy #searchbar {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    border-radius: 6px;
+    padding: 0.5em 0.8em;
+    font-size: 0.95em;
+}
+
+.navy #searchbar:focus {
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+    outline: none;
+}
+
+.navy .searchresults a {
+    color: #58a6ff;
+}
+
+.navy .search-results .search-results-title {
+    color: #f0f6fc;
+}
+
+/* ─── Menu bar ─── */
+.navy #menu-bar {
+    background: #010409;
+    border-bottom: 1px solid #21262d;
+}
+
+/* ─── Print-friendly ─── */
+@media print {
+    .navy pre {
+        border: 1px solid #ccc;
+        background: #f6f8fa !important;
+    }
+    
+    .navy code {
+        color: #1f2328;
+    }
+    
+    .navy h1 {
+        color: #1f2328;
+        border-bottom-color: #d0d7de;
+    }
+    
+    .navy h3 {
+        color: #0969da;
+    }
+}
+
+/* ─── Scrollbar ─── */
+.navy ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.navy ::-webkit-scrollbar-track {
+    background: #0d1117;
+}
+
+.navy ::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 4px;
+}
+
+.navy ::-webkit-scrollbar-thumb:hover {
+    background: #484f58;
+}
+
+/* ─── Copy button on code blocks ─── */
+.navy .clip-button {
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #8b949e;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+.navy pre:hover .clip-button {
+    opacity: 1;
+}
+
+.navy .clip-button:hover {
+    background: #30363d;
+    color: #c9d1d9;
+}
+
+/* ─── Emoji badges for speed hacks / decision trees ─── */
+.navy h3 code {
+    background: rgba(240, 136, 62, 0.15);
+    border-color: rgba(240, 136, 62, 0.3);
+    color: #f0883e;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+/* ─── "Why" labels ─── */
+.navy strong:first-child {
+    color: #e6edf3;
+}
+
+/* ─── Mobile responsive ─── */
+@media (max-width: 768px) {
+    .navy .content main {
+        font-size: 15px;
+        padding: 0.8em;
+    }
+    
+    .navy pre {
+        font-size: 13px;
+        padding: 0.8em;
+    }
+    
+    .navy h1 {
+        font-size: 1.6em;
+    }
+}

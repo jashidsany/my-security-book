@@ -1,0 +1,33 @@
+[book]
+title = "OSCP Methodology"
+authors = ["Jashid Sany"]
+description = "A comprehensive offensive security methodology covering reconnaissance through domain compromise."
+language = "en"
+src = "src"
+
+[build]
+build-dir = "book"
+
+[output.html]
+default-theme = "navy"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/jashidsany/oscp-methodology"
+edit-url-template = "https://github.com/jashidsany/oscp-methodology/edit/main/src/{path}"
+site-url = "/"
+no-section-label = false
+additional-css = ["theme/custom.css"]
+
+[output.html.search]
+enable = true
+limit-results = 30
+teaser-word-count = 30
+use-hierarchical = true
+boost-title = 2
+boost-hierarchy = 1
+boost-paragraph = 1
+expand = true
+heading-split-level = 3
+
+[output.html.fold]
+enable = true
+level = 1

@@ -95,6 +95,37 @@
   - [WINDOWS PORT FORWARDING](pivoting/windows-port-forwarding.md)
   - [PROXYCHAINS CONFIGURATION](pivoting/proxychains-configuration.md)
 
+
+# 🎯 Common Applications
+
+- [Common Applications](apps/index.md)
+  - [Apache Tomcat](apps/tomcat.md)
+  - [WordPress](apps/wordpress.md)
+  - [Drupal](apps/drupal.md)
+  - [Joomla](apps/joomla.md)
+  - [phpMyAdmin](apps/phpmyadmin.md)
+  - [Jenkins](apps/jenkins.md)
+  - [GitLab](apps/gitlab.md)
+  - [Webmin](apps/webmin.md)
+  - [CMS Made Simple](apps/cms-made-simple.md)
+  - [Elasticsearch / Kibana](apps/elasticsearch.md)
+
+# 💥 Buffer Overflow
+
+- [Buffer Overflow](bof/index.md)
+
+# 🔓 Password Attacks
+
+- [Password Attacks](passwords/index.md)
+
+# 🧪 Payload Generation
+
+- [Payload Generation](payloads/index.md)
+
+# 🎣 Client-Side Attacks
+
+- [Client-Side Attacks](client-side/index.md)
+
 # ⚡ Speed Hacks
 
 - [Speed Hacks](speed/index.md)

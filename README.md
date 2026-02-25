@@ -68,7 +68,7 @@ Commit and push. Amplify auto-deploys.
 ## Project Structure
 
 ```bash
-oscp-book/
+my-security-book/
   amplify.yml            # Amplify build config
   book.toml              # mdBook configuration
   theme/

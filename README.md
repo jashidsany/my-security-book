@@ -1,96 +1,39 @@
-# my-security-book
-Offensive security methodology &amp; reference book
+# Offensive Security Resources
 
-**Live at:** [book.jashidsany.com](https://book.jashidsany.com)
+> A comprehensive offensive security reference covering reconnaissance through domain compromise.
 
-## How It Works
+## How to Use This Book
 
-- Content is written in Markdown files in `src/`
-- `src/SUMMARY.md` defines the sidebar navigation
-- Push to `main` → Amplify auto-builds with mdBook → live in ~2 minutes
-- Dark theme with full-text search, code copy buttons, keyboard navigation
+This book is organized as a sequential methodology for penetration testing engagements:
 
-## Local Preview
+1. **Recon & Scanning** — Find open ports and services
+2. **Port Enumeration** — Dig into each service 
+3. **Web Enumeration** — Map the web attack surface
+4. **Web Attacks** — Exploit web vulnerabilities for footholds
+5. **Linux / Windows PrivEsc** — Escalate to root/SYSTEM
+6. **Active Directory** — Enumerate and compromise the domain
+7. **Pivoting** — Reach internal networks
 
-```bash
-# Install mdBook (one-time)
-brew install mdbook        # macOS
-cargo install mdbook       # any OS with Rust
+Plus operational sections:
 
-# Preview
-mdbook serve --open
-# Opens at http://localhost:3000
-```
+- **Speed Hacks** — One-liner chains and parallel scanning
+- **Decision Trees** — When to move on vs. dig deeper
+- **Rabbit Holes** — Traps to avoid
+- **Credential Tracking** — Log and spray every credential
 
-## Updating Content
+## Quick Reference
 
-### Add a technique to an existing page
-
-Edit any `.md` file in `src/` and add:
-
-```markdown
-### Name of Technique
-
-\```bash
-command --to-run $IP
-\```
-
-> When and why to use this
-
-**Why:** What this achieves
-
-<details>
-<summary>Example Output</summary>
-
-\```
-example output here
-\```
-</details>
+| Need | Go To |
+|------|-------|
+| Initial port scan commands | [Recon & Scanning](recon/index.md) |
+| Enumerate a specific port | [Port Enumeration](ports/index.md) |
+| Web app testing | [Web Attacks](web-attacks/index.md) |
+| Linux root | [Linux PrivEsc](linux-pe/index.md) |
+| Windows SYSTEM | [Windows PrivEsc](windows-pe/index.md) |
+| Domain compromise | [Active Directory](ad/index.md) |
+| Reach internal net | [Pivoting](pivoting/index.md) |
+| Time management | [Decision Trees](decisions/index.md) |
 
 ---
-```
 
-Commit and push. Amplify auto-deploys.
-
-### Add a new page
-
-1. Create a `.md` file in the appropriate directory
-2. Add content
-3. Add to `src/SUMMARY.md`
-4. Commit and push
-
-### Add a new section
-
-1. Create directory + `index.md`
-2. Add to `src/SUMMARY.md`
-3. Commit and push
-
-## Project Structure
-
-```bash
-my-security-book/
-  amplify.yml            # Amplify build config
-  book.toml              # mdBook configuration
-  theme/
-    custom.css           # Dark terminal theme
-  src/
-    SUMMARY.md           # Table of contents → sidebar
-    README.md            # Landing page
-    recon/               # Recon & Scanning
-    ports/               # Port Enumeration (16 pages)
-    web-enum/            # Web Enumeration
-    web-attacks/         # Web Attacks (10 pages)
-    quick-ref/           # Wordlists, transfers, hashes
-    linux-pe/            # Linux PrivEsc (9 pages)
-    windows-pe/          # Windows PrivEsc (8 pages)
-    ad/                  # Active Directory (7 pages)
-    pivoting/            # Pivoting & Tunneling (6 pages)
-    speed/               # Speed Hacks
-    decisions/           # Decision Trees
-    rabbit-holes/        # Rabbit Hole Warnings
-    creds/               # Credential Tracking
-```
-
-## Check out my blog!
-
-- **[jashidsany.com](https://jashidsany.com)** — Blog & portfolio
+*Built by [Jashid Sany](https://www.jashidsany.com) for penetration testing and red team engagements.*

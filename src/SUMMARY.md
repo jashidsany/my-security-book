@@ -4,6 +4,10 @@
 
 ---
 
+# Methodology Flowchart
+
+- [Methodology Flowchart](flowchart/index.md)
+
 # Recon & Scanning
 
 - [Recon & Scanning](recon/index.md)
@@ -78,6 +82,7 @@
   - [CRON JOBS](linux-pe/cron-jobs.md)
   - [FILE PERMISSIONS & CAPABILITIES](linux-pe/file-permissions-capabilities.md)
   - [PATH HIJACK & LIBRARY HIJACKING](linux-pe/path-hijack.md)
+  - [WILDCARD INJECTION](linux-pe/wildcard-injection.md)
   - [KERNEL EXPLOITS](linux-pe/kernel-exploits.md)
   - [DOCKER / LXD / CONTAINER ESCAPE](linux-pe/docker-lxd-container-escape.md)
   - [NFS & INTERNAL SERVICES](linux-pe/nfs-internal-services.md)
@@ -152,6 +157,14 @@
 # Port Knocking
 
 - [Port Knocking](port-knocking/index.md)
+
+# Steganography
+
+- [Steganography](stego/index.md)
+
+# Persistence
+
+- [Persistence](persistence/index.md)
 
 # Quick Reference
 

@@ -91,6 +91,6 @@ my-security-book/
     creds/               # Credential Tracking
 ```
 
-## Companion Tools
+## Check out my blog!
 
 - **[jashidsany.com](https://jashidsany.com)** — Blog & portfolio

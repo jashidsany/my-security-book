@@ -34,25 +34,6 @@ And operational sections:
 - **Rabbit Holes** — Traps to avoid
 - **Credential Tracking** — Log and spray every credential
 
-## Quick Reference
-
-| Need | Go To |
-|------|-------|
-| Initial port scan commands | [Recon & Scanning](recon/index.md) |
-| Enumerate a specific port | [Port Enumeration](ports/index.md) |
-| Web app testing | [Web Attacks](web-attacks/index.md) |
-| Exploit a known application | [Common Applications](apps/index.md) |
-| Generate a payload or shell | [Payload Generation](payloads/index.md) |
-| Transfer files to target | [File Transfers](transfers/index.md) |
-| Crack a hash | [Password Attacks](passwords/index.md) |
-| Linux root | [Linux PrivEsc](linux-pe/index.md) |
-| Windows SYSTEM | [Windows PrivEsc](windows-pe/index.md) |
-| Domain compromise | [Active Directory](ad/index.md) |
-| Reach internal net | [Pivoting](pivoting/index.md) |
-| Escape a restricted shell | [Restricted Shell Escapes](shell-escapes/index.md) |
-| Compile an exploit | [Compiling Exploits](compiling/index.md) |
-| Time management | [Decision Trees](decisions/index.md) |
-
 ---
 
 *Built by [Jashid Sany](https://www.jashidsany.com) for penetration testing and red team engagements.*

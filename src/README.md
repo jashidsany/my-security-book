@@ -1,6 +1,6 @@
 # Offensive Security Resources
 
-> A comprehensive offensive security reference built for penetration testers and red teamers. 113 pages covering reconnaissance through domain compromise, with copy-paste commands and real-world methodology.
+> A comprehensive offensive security reference built for penetration testers and red teamers.
 
 ---
 

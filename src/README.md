@@ -18,9 +18,9 @@ This is a hands-on reference designed to be open during engagements, lab work, a
 **What it covers:**
 
 - Full attack chain from initial nmap scan to domain admin
-- 19 common applications with default creds and known exploit paths
-- 15 port-specific enumeration guides
-- Linux and Windows privilege escalation (11+ techniques each)
+- Common applications with default creds and known exploit paths
+- Port-specific enumeration guides
+- Linux and Windows privilege escalation
 - Active Directory attacks including BloodHound, delegation, and ticket forging
 - Supporting topics: file transfers, shell escapes, payload generation, password cracking, steganography, and persistence
 
@@ -30,7 +30,7 @@ This is a hands-on reference designed to be open during engagements, lab work, a
 
 **Start with the Methodology Flowchart.** It's the first section in the sidebar and acts as a master decision tree for the entire book. When you're stuck, go back to the flowchart.
 
-**Use search.** Press `S` or click the magnifying glass to search across all 113 pages. Search for a port number, tool name, CVE, or technique and you'll find the relevant page instantly.
+**Use search.** Press `S` or click the magnifying glass to search across all pages. Search for a port number, tool name, CVE, or technique and you'll find the relevant page instantly.
 
 **Follow the sidebar order.** The book is structured as a sequential methodology. The sidebar flows from reconnaissance at the top through post-exploitation at the bottom. During an engagement, you'll generally work top to bottom.
 

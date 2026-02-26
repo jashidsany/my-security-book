@@ -184,11 +184,4 @@ pip install bloodhound impacket --break-system-packages
 
 ---
 
-## Companion Tools
-
-- **[stego-drop](https://github.com/jashidsany/stego-drop)** — Steganographic payload embedding tool
-- **[web-enum](https://github.com/jashidsany/web-enum)** — Automated web enumeration
-
----
-
 *Built by [Jashid Sany](https://www.jashidsany.com) for penetration testing and red team engagements.*

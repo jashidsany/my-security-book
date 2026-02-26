@@ -1,30 +1,21 @@
 # Common Applications
 
-Exploitation techniques for well-known applications. Each app has default credentials, known attack paths, and quick wins.
+Exploitation techniques for well-known applications you'll encounter on engagements. Each app page includes a description of what it is, default credentials, known exploit paths, and links to vulnerability databases for version-specific research.
 
-**Web Servers & Frameworks:**
-- [Apache / Nginx Misconfigs](apache-nginx.md)
-- [Node.js / Express](nodejs-express.md)
-- [Flask / Django](flask-django.md)
+**Browse by category:**
 
-**CMS Platforms:**
-- [WordPress](wordpress.md)
-- [Drupal](drupal.md)
-- [Joomla](joomla.md)
-- [CMS Made Simple](cms-made-simple.md)
+- **[Web Servers & Frameworks](web-servers/index.md)** — Apache, Nginx, IIS, Node.js, Flask, Django, PHP
+- **[CMS Platforms](cms/index.md)** — WordPress, Drupal, Joomla, CMS Made Simple, Magento, Moodle
+- **[Application Servers & Admin Panels](admin-panels/index.md)** — Tomcat, Jenkins, GitLab, Webmin, Grafana, phpMyAdmin, PostgreSQL, Elasticsearch, Nagios, Splunk, Docker API
+- **[Service-Specific Exploits](services/index.md)** — ProFTPD, vsftpd, Samba, Exim, Dovecot, OpenSSH, CUPS
 
-**Application Servers & Admin Panels:**
-- [Apache Tomcat](tomcat.md)
-- [Jenkins](jenkins.md)
-- [GitLab](gitlab.md)
-- [Webmin](webmin.md)
-- [Grafana](grafana.md)
-- [phpMyAdmin](phpmyadmin.md)
-- [PostgreSQL / pgAdmin](postgresql.md)
-- [Elasticsearch / Kibana](elasticsearch.md)
+**Universal vuln research links:**
 
-**Service-Specific Exploits:**
-- [ProFTPD](proftpd.md)
-- [vsftpd 2.3.4](vsftpd.md)
-- [Samba (Exploits)](samba.md)
-- [Exim](exim.md)
+| Resource | URL |
+|----------|-----|
+| SearchSploit (local) | `searchsploit <app> <version>` |
+| Exploit-DB | [exploit-db.com](https://www.exploit-db.com/) |
+| CVE Details | [cvedetails.com](https://www.cvedetails.com/) |
+| HackTricks | [book.hacktricks.wiki](https://book.hacktricks.wiki/) |
+| NVD (NIST) | [nvd.nist.gov](https://nvd.nist.gov/) |
+| GitHub Advisory | [github.com/advisories](https://github.com/advisories) |

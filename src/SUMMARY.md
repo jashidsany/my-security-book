@@ -8,6 +8,10 @@
 
 - [Methodology Flowchart](flowchart/index.md)
 
+# CVE Database
+
+- [CVE Database](cve-database/index.md)
+
 # Recon & Scanning
 
 - [Recon & Scanning](recon/index.md)

